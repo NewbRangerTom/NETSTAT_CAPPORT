@@ -13,7 +13,7 @@
   
   Built by Khoi Hoang https://github.com/khoih-prog/ESP_WiFiManager
   Licensed under MIT license
-*****************************************************************************************************************************/
+****************************************************************************************************************************/
 
 #if !( defined(ESP8266) || defined(ESP32) )
   #error This code is intended to run only on the ESP8266 and ESP32 boards ! Please check your Tools->Board setting.
