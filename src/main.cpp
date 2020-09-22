@@ -20,7 +20,7 @@
 #endif
 
 // Use from 0 to 4. Higher number, more debugging messages and memory usage.
-#define _WIFIMGR_LOGLEVEL_    3
+#define _WIFIMGR_LOGLEVEL_    2
 
 //For ESP32, To use ESP32 Dev Module, QIO, Flash 4MB/80MHz, Upload 921600
 
@@ -89,8 +89,8 @@
 #endif
 
 // setup for ping and status LED's
-#define ledR  D2
-#define ledG  D3
+#define ledR  D3
+#define ledG  D4
 int dt1=1000;
 int dt2=2000;
 int dt5=5000;
@@ -101,7 +101,7 @@ long second =  1000; // 1000 milliseconds in a second
 
 // SSID and PW for Config Portal
 String ssid = "ESP_" + String(ESP_getChipId(), HEX);
-const char* password = "firstsetup";
+const char* password = "config_me";
 
 // SSID and PW for your Router
 String Router_SSID;
@@ -153,7 +153,7 @@ bool initialConfig = false;
 // From v1.0.10 to permit disable/enable StaticIP configuration in Config Portal from sketch. Valid only if DHCP is used.
 // You'll loose the feature of dynamically changing from DHCP to static IP, or vice versa
 // You have to explicitly specify false to disable the feature.
-//#define USE_STATIC_IP_CONFIG_IN_CP          false
+#define USE_STATIC_IP_CONFIG_IN_CP          false
 
 // Use false to disable NTP config. Advisable when using Cellphone, Tablet to access Config Portal.
 // See Issue 23: On Android phone ConfigPortal is unresponsive (https://github.com/khoih-prog/ESP_WiFiManager/issues/23)
@@ -166,19 +166,6 @@ bool initialConfig = false;
 // New in v1.0.11
 #define USING_CORS_FEATURE          true
 //////
-
-// Use USE_DHCP_IP == true for dynamic DHCP IP, false to use static IP which you have to change accordingly to your network
-#if (defined(USE_STATIC_IP_CONFIG_IN_CP) && !USE_STATIC_IP_CONFIG_IN_CP)
-// Force DHCP to be true
-#if defined(USE_DHCP_IP)
-#undef USE_DHCP_IP
-#endif
-#define USE_DHCP_IP     true
-#else
-// You can select DHCP or Static IP here
-//#define USE_DHCP_IP     true
-#define USE_DHCP_IP     false
-#endif
 
 // Use USE_DHCP_IP == true for dynamic DHCP IP, false to use static IP which you have to change accordingly to your network
 #if (defined(USE_STATIC_IP_CONFIG_IN_CP) && !USE_STATIC_IP_CONFIG_IN_CP)
@@ -453,6 +440,9 @@ void setup()
   //Local intialization. Once its business is done, there is no need to keep it around
   // Use this to default DHCP hostname to ESP8266-XXXXXX or ESP32-XXXXXX
   ESP_WiFiManager ESP_wifiManager;
+  //ESP_wifiManager.resetSettings();  //uncomment these two line to clear the saved config
+  //ESP_wifiManager.autoConnect("ESP8266","password");
+
   // Use this to personalize DHCP hostname (RFC952 conformed)
   //ESP_WiFiManager ESP_wifiManager("ConfigOnStartup");
 
