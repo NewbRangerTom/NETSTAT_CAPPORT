@@ -89,8 +89,8 @@
 #endif
 
 // setup for ping and status LED's
-#define ledR  D3
-#define ledG  D4
+#define ledR  D2
+#define ledG  D3
 int dt1=1000;
 int dt2=2000;
 int dt5=5000;
@@ -605,11 +605,11 @@ void loop()
 {
   // put your main code here, to run repeatedly
   // all Serial.print or .println and time are for debugging purposes.
-    if(WiFi.status() == WL_CONNECTED){
+  if(WiFi.status() == WL_CONNECTED){
     Serial.print("LAN UP ");
     time();
     Serial.println(" ");
-    }
+  }
 
   if(Ping.ping(remote_ip)) {
     Serial.print("WAN UP ");
@@ -617,13 +617,13 @@ void loop()
     Serial.println(" ");
     digitalWrite(ledG, HIGH);
     digitalWrite(ledR, LOW);
-    } 
+  } 
   else {
     Serial.print("WAN Down ");
     time();
     Serial.println(" ");
     digitalWrite(ledG, LOW);
     digitalWrite(ledR, HIGH);
-    }
+  }
   check_status();
 }
